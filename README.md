@@ -5,8 +5,11 @@ koa小项目
 ````mysql
 create database if not exists `pan` default charset=utf8;
 use `pan`;
-create table `user` (
+create table `users` (
     `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
-    `name` varchar(20) NOT NULL COMMENT 'name',
+    `username` varchar(32) NOT NULL COLLATE utf8_bin COMMENT 'username',
+    `password` varchar(32) NOT NULL COMMENT 'password',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `username` (`username`)
 ) engine=InnoDB default charset=utf-8
 ````
