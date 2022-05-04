@@ -2,29 +2,26 @@ import {User} from '../model'
 
 /**添加用户 */
 export async function addUser(username:string,password:string) {
-    await User.create({
+    const user=await User.create({
         username:username,
         password:password
-    }).then((res)=>{
-        console.log(res);
-        
-    }).catch((err)=>{
-        console.log(err);
-        
     })
+    user.username
+    return user
+
 }
 
 /**查找密码 */
-export async function getPassword(username:string) {
-    await User.findAll({
+export async function getUser(username:string) {
+    
+    const user=await User.findAll({
         where:{
             username:username
+
         }
-    }).then((res)=>{
-        console.log(res);
-        
-    }).catch((err)=>{
-        console.log(err);
-        
     })
+    console.log(typeof user);
+    
+    return user[0]
+    
 }

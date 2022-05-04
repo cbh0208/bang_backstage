@@ -8,13 +8,11 @@ const app = new Koa();
 
 app.use(LogMiddleware);
 app.use(CORSMiddleware)
-
 app.use(koaBody())
 
 app.use(Router.routes()).use(Router.allowedMethods())
 
-
-app.listen(3000,()=>{
+app.listen(5000,()=>{
     console.log(`Server is running !!`)
 });
 

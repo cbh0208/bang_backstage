@@ -1,29 +1,40 @@
 import Router from 'koa-router'
-import {getPassword,addUser} from '../../service/User'
+import {md5} from '../../utils/crypto'
+import {getUser,addUser} from '../../service/User'
 const router = new Router({prefix:'/user'});
 
+type user={
+    username:string,
+    password:string
+}
 
 /** 登录 */
 router.post('/login',async (ctx,next)=>{
-    let data=ctx.request.body
-    getPassword(data['username']).then((res)=>{
-        console.log(res);
-        
-    }).catch((err)=>{
+    const data:user=ctx.request.body
+    const user=await getUser(data.username)
+    if(user){
+        if(md5(data.password)===user.password){
+            ctx.body=``
+        }
+        else {
+            ctx.body=``
+        }
+    }
+    else {
+        ctx.body=``
+    }
+    
+    
+    
 
-    })
-    ctx.body=`8985`
+    
     
 })
 /** 注册 */
 router.post('/signup', async (ctx,next)=>{
-    let data=ctx.request.body
-    addUser(data['username'],data['password']).then((res)=>{
-        console.log(res);
-        
-    }).catch((err)=>{
-        
-    })
+    const data=ctx.request.body
+
+
     ctx.body=``
 })
 

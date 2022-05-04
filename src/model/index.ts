@@ -1,7 +1,8 @@
-import {Sequelize,BIGINT,STRING} from 'sequelize';
-import {mysql} from '../config'
-const sequelize=new Sequelize(mysql.database,mysql.username,mysql.password,{
-    host:mysql.host,
+import { Sequelize, Model, DataTypes, Optional } from 'sequelize';
+import {mysqlConfig} from '../config'
+
+const mysql=new Sequelize(mysqlConfig.database,mysqlConfig.username,mysqlConfig.password,{
+    host:mysqlConfig.host,
     dialect:'mysql',
     pool:{
         max:5,
@@ -11,14 +12,26 @@ const sequelize=new Sequelize(mysql.database,mysql.username,mysql.password,{
 })
 
 /** 用户 */
-export const User=sequelize.define('user',{
+interface UserInstance extends Model{
+    id:number;
+    username:string;
+    password:string
+}
+export const User=mysql.define<UserInstance>('user',{
     id:{
-        type:BIGINT,
+        type:DataTypes.BIGINT,
         primaryKey:true
     },
-    username:STRING(32),
-    password:STRING(32)
+    username:{
+        type:DataTypes.STRING(32),
+        unique:true
+        
+    },
+    password:{
+        type:DataTypes.STRING(32)
+    }
 },{
+    tableName:'users',
     timestamps:false
 })
 
