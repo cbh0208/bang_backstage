@@ -1,5 +1,5 @@
 {
-  "name": "pan",
+  "name": "my-app",
   "description": "a little koa project",
   "scripts": {
     "start": "tsc && node dict/main.js"

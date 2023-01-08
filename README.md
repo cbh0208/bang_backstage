@@ -11,5 +11,5 @@ create table `users` (
     `password` varchar(32) NOT NULL COMMENT 'password',
     PRIMARY KEY (`id`),
     UNIQUE KEY `username` (`username`)
-) engine=InnoDB default charset=utf-8
+) engine=InnoDB default charset=utf8;
 ````
